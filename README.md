@@ -1,40 +1,33 @@
-<h1 align="center">
-    <a href="https://github.com/WolfSoftware">
-        <img src="https://raw.githubusercontent.com/WolfSoftware/branding/master/images/general/banners/64/black-and-white.png" alt="Wolf Software Logo" />
-    </a>
-    <br>
-    ShellCheck
-</h1>
-
 <p align="center">
+    <a href="https://github.com/CICDToolbox">
+        <img src="https://cdn.wolfsoftware.com/assets/images/github/organisations/cicdtoolbox/black-and-white-circle-256.png" alt="CICDToolbox Logo" />
+    </a>
+    <br />
     <a href="https://github.com/CICDToolbox/shellcheck/actions/workflows/pipeline.yml">
-        <img src="https://img.shields.io/github/workflow/status/CICDToolbox/shellcheck/pipeline/master?logo=github&logoColor=white&style=for-the-badge" alt="Github Build Status">
-    </a>
-    <a href="https://travis-ci.com/CICDToolbox/shellcheck">
-        <img src="https://img.shields.io/travis/com/CICDToolbox/shellcheck/master?style=for-the-badge&logo=travis" alt="Travis Build Status">
+        <img src="https://img.shields.io/github/workflow/status/CICDToolbox/shellcheck/pipeline/master?style=for-the-badge" alt="Github Build Status">
     </a>
     <a href="https://github.com/CICDToolbox/shellcheck/releases/latest">
-        <img src="https://img.shields.io/github/v/release/CICDToolbox/shellcheck?color=blue&style=for-the-badge&logo=github&logoColor=white&label=Latest%20Release" alt="Release">
+        <img src="https://img.shields.io/github/v/release/CICDToolbox/shellcheck?color=blue&label=Latest%20Release&style=for-the-badge" alt="Release">
     </a>
     <a href="https://github.com/CICDToolbox/shellcheck/releases/latest">
-        <img src="https://img.shields.io/github/commits-since/CICDToolbox/shellcheck/latest.svg?color=blue&style=for-the-badge&logo=github&logoColor=white" alt="Commits since release">
+        <img src="https://img.shields.io/github/commits-since/CICDToolbox/shellcheck/latest.svg?color=blue&style=for-the-badge" alt="Commits since release">
     </a>
-    <br>
+    <br />
     <a href=".github/CODE_OF_CONDUCT.md">
-        <img src="https://img.shields.io/badge/Code%20of%20Conduct-blue?style=for-the-badge&logo=read-the-docs&logoColor=white" />
+        <img src="https://img.shields.io/badge/Code%20of%20Conduct-blue?style=for-the-badge" />
     </a>
     <a href=".github/CONTRIBUTING.md">
-        <img src="https://img.shields.io/badge/Contributing-blue?style=for-the-badge&logo=read-the-docs&logoColor=white" />
+        <img src="https://img.shields.io/badge/Contributing-blue?style=for-the-badge" />
     </a>
     <a href=".github/SECURITY.md">
-        <img src="https://img.shields.io/badge/Report%20Security%20Concern-blue?style=for-the-badge&logo=read-the-docs&logoColor=white" />
+        <img src="https://img.shields.io/badge/Report%20Security%20Concern-blue?style=for-the-badge" />
     </a>
     <a href="https://github.com/CICDToolbox/shellcheck/issues">
-        <img src="https://img.shields.io/badge/Get%20Support-blue?style=for-the-badge&logo=read-the-docs&logoColor=white" />
+        <img src="https://img.shields.io/badge/Get%20Support-blue?style=for-the-badge" />
     </a>
-    <br>
-    <a href="https://github.com/TGWolf">
-        <img src="https://img.shields.io/badge/Created%20by%20Wolf-black?style=for-the-badge" />
+    <br />
+    <a href="https://wolfsoftware.com">
+        <img src="https://img.shields.io/badge/Created%20by%20Wolf%20Software-blue?style=for-the-badge" />
     </a>
 </p>
 
@@ -42,11 +35,9 @@
 
 A tool to lint your shell scripts with [ShellCheck](https://github.com/koalaman/shellcheck) in CI/CD pipelines.
 
+This tool has been written and tested using GitHub Actions but it should work out of the box with a lot of other CI/CD tools.
+
 ## Usage
-
-### GitHub Actions
-
-#### Basic Usage
 
 ```yml
 on: [push, pull_request]
@@ -55,19 +46,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
     - name: Run Shellcheck
-      run: wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/shellcheck/master/pipeline.sh | bash
+      run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/shellcheck/master/pipeline.sh)
 ```
 
-### Travis CI
+### Other Options
 
-#### Basic Usage
+The following environment variables can be set in order to customise the script.
+
+| Name          | Purpose | Default Value |
+| ------------- | ------- | ------------- |
+| EXCLUDE_FILES | A comma separated list of files to exclude from being scanned. | Unset |
+| REPORT_ONLY   | Generate the report but do not fail the build even if an error occurred. | False | 
+| SHOW_ERRORS   | Show the actual errors instead of just which files had errors. | False | 
+
+You can use any combination of the above settings.
 
 ```yml
-language: bash
-os: linux
+on: [push, pull_request]
 
-script:
-  - wget --quiet -O - https://raw.githubusercontent.com/CICDToolbox/shellcheck/master/pipeline.sh | bash
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    - name: Run Shellcheck
+      env:
+        REPORT_ONLY: true
+        SHOW_ERRORS: true
+      run: bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/shellcheck/master/pipeline.sh)
 ```
 
 ### Example Output
@@ -75,19 +79,6 @@ script:
 This is an example of the output report generated by this tool, this is the actual output from the tool running against itself.
 
 ```
---------------------------------------------------------------------------------
-          Scanning all shell scripts with shellcheck (version: 0.7.2)
---------------------------------------------------------------------------------
- [  OK  ] Processing successful for pipeline.sh
- [  OK  ] Processing successful for tests/advanced-tests
- [  OK  ] Processing successful for tests/bash.sh
- [  OK  ] Processing successful for tests/dash.sh
- [  OK  ] Processing successful for tests/ksh.sh
- [  OK  ] Processing successful for tests/no-extension
- [  OK  ] Processing successful for tests/sh.sh
---------------------------------------------------------------------------------
-                     Total: 7, OK: 7, Failed: 0, Skipped: 0
---------------------------------------------------------------------------------
 ```
 
 ### File Identification
@@ -102,11 +93,3 @@ AND
 [[ ${filename} =~ \.(sh|bash|dash|ksh)$ ]]
 
 ```
-
-## Show Support
-
-<p>
-	<a href="https://ko-fi.com/wolfsoftware">
-		<img src="https://img.shields.io/badge/Ko%20Fi-blue?style=for-the-badge&logo=ko-fi&logoColor=white" />
-	</a>
-</p>
