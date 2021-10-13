@@ -28,7 +28,7 @@ set -Eeuo pipefail
 DOCKER_CONTAINER='koalaman/shellcheck:stable'
 INSTALL_COMMAND="docker pull --quiet ${DOCKER_CONTAINER}"
 
-TEST_COMMAND="docker run --rm -v \"$PWD:/mnt\" ${DOCKER_CONTAINER}"
+TEST_COMMAND="docker run --rm -v '${PWD}:/mnt' ${DOCKER_CONTAINER}"
 FILE_TYPE_SEARCH_PATTERN='(shell|dash) script'
 FILE_NAME_SEARCH_PATTERN='\.(sh|bash|dash|ksh)$'
 
