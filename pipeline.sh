@@ -29,7 +29,7 @@ set -Eeuo pipefail
 # -------------------------------------------------------------------------------- #
 
 DOCKER_CONTAINER='koalaman/shellcheck:stable'
-DOCKER_CONTAINER_SHORT='shellcheck (Docker)'
+DOCKER_CONTAINER_SHORT='shellcheck'
 
 INSTALL_COMMAND="docker pull --quiet ${DOCKER_CONTAINER}"
 VERSION_COMMAND="docker run ${DOCKER_CONTAINER}"
