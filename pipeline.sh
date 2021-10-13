@@ -25,7 +25,7 @@ set -Eeuo pipefail
 # CURRENT_STAGE - The current stage used for the reporting output.                 #
 # -------------------------------------------------------------------------------- #
 
-INSTALL_COMMANDS=('wget -q https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz' 'sudo tar -xvf shellcheck-stable.linux.x86_64.tar.xz -C /usr/bin' 'which shellcheck')
+INSTALL_COMMANDS=('wget -q https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz' 'sudo tar -xvf shellcheck-stable.linux.x86_64.tar.xz -C /usr/bin')
 
 TEST_COMMAND='shellcheck'
 FILE_TYPE_SEARCH_PATTERN='(shell|dash) script'
@@ -43,6 +43,8 @@ CURRENT_STAGE=0
 function install_prerequisites
 {
     stage "Install Prerequisites"
+
+which shellcheck
 
 # We want to overwrite legacy verions
 #    if ! command -v ${TEST_COMMAND} &> /dev/null
