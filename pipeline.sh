@@ -65,6 +65,7 @@ function install_prerequisites
 function get_version_information
 {
     VERSION=$(${TEST_COMMAND} --version | grep 'version:' | awk '{ print $2 }' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
+echo $VERSION
     BANNER="Run ${TEST_COMMAND} (v${VERSION})"
 }
 
