@@ -28,7 +28,7 @@ set -Eeuo pipefail
 #wget -q -O - "http://wordpress.org/latest.tar.gz" | tar -xzf - -C /var/www
 
 #INSTALL_COMMANDS=('wget -qO- "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf' 'sudo cp "shellcheck-stable/shellcheck" /usr/bin/' 'sudo chmod 755 /usr/bin/shellcheck')
-INSTALL_COMMAND='wget -q -O - "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz | tar -xzf - -C /usr/bin/'
+INSTALL_COMMAND='wget -q -O - "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf - -C /usr/bin/'
 #('wget -qO- "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf' 'sudo cp "shellcheck-stable/shellcheck" /usr/bin/' 'sudo chmod 755 /usr/bin/shellcheck')
 
 TEST_COMMAND='shellcheck'
