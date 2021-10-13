@@ -27,7 +27,7 @@ set -Eeuo pipefail
 
 INSTALL_COMMANDS=('wget -qO- "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xJ' 'sudo cp "shellcheck-stable/shellcheck" /usr/local/bin/' 'sudo chmod 755 /usr/local/bin/shellcheck')
 
-TEST_COMMAND='/usr/local/bin/shellcheck'
+TEST_COMMAND='shellcheck'
 FILE_TYPE_SEARCH_PATTERN='(shell|dash) script'
 FILE_NAME_SEARCH_PATTERN='\.(sh|bash|dash|ksh)$'
 
