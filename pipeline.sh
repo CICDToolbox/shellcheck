@@ -17,7 +17,10 @@ set -Eeuo pipefail
 # -------------------------------------------------------------------------------- #
 # Global Variables                                                                 #
 # -------------------------------------------------------------------------------- #
+# DOCKER_CONTAINER - The docker container to use.                                  #
+# DOCKER_CONTAINER_SHORT - Short name for version banner.                          #
 # INSTALL_COMMAND - The command to execute to do the install.                      #
+# VERSION_COMMAND - What to run to get the version out of the container.           #
 # TEST_COMMAND - The command to execute to perform the test.                       #
 # FILE_TYPE_SEARCH_PATTERN - The pattern used to match file types.                 #
 # FILE_NAME_SEARCH_PATTERN - The pattern used to match file names.                 #
@@ -26,9 +29,12 @@ set -Eeuo pipefail
 # -------------------------------------------------------------------------------- #
 
 DOCKER_CONTAINER='koalaman/shellcheck:stable'
-INSTALL_COMMAND="docker pull --quiet ${DOCKER_CONTAINER}"
+DOCKER_CONTAINER_SHORT='shellcheck (Docker)'
 
+INSTALL_COMMAND="docker pull --quiet ${DOCKER_CONTAINER}"
+VERSION_COMMAND="docker run ${DOCKER_CONTAINER}"
 TEST_COMMAND="docker run --rm -v ${PWD}:/mnt ${DOCKER_CONTAINER}"
+
 FILE_TYPE_SEARCH_PATTERN='(shell|dash) script'
 FILE_NAME_SEARCH_PATTERN='\.(sh|bash|dash|ksh)$'
 
@@ -64,8 +70,8 @@ function install_prerequisites
 
 function get_version_information
 {
-    VERSION=$(${TEST_COMMAND} --version | grep 'version:' | awk '{ print $2 }' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
-    BANNER="Run ${DOCKER_CONTAINER} (v${VERSION})"
+    VERSION=$(${VERSION_COMMAND} --version | grep 'version:' | awk '{ print $2 }' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
+    BANNER="Run ${DOCKER_CONTAINER_SHORT} (v${VERSION})"
 }
 
 # -------------------------------------------------------------------------------- #
