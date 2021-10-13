@@ -25,9 +25,10 @@ set -Eeuo pipefail
 # CURRENT_STAGE - The current stage used for the reporting output.                 #
 # -------------------------------------------------------------------------------- #
 
-INSTALL_COMMANDS=('wget -q https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz' 'sudo tar -xvf shellcheck-stable.linux.x86_64.tar.xz -C /usr/bin')
+DOCKER_CONTAINER='koalaman/shellcheck'
+INSTALL_COMMAND="docker pull --quiet ${DOCKER_CONTAINER}"
 
-TEST_COMMAND='shellcheck'
+TEST_COMMAND="docker run --rm \"$PWD:/mnt\" ${DOCKER_CONTAINER}:stable"
 FILE_TYPE_SEARCH_PATTERN='(shell|dash) script'
 FILE_NAME_SEARCH_PATTERN='\.(sh|bash|dash|ksh)$'
 
@@ -44,23 +45,15 @@ function install_prerequisites
 {
     stage "Install Prerequisites"
 
-which shellcheck
-
-# We want to overwrite legacy verions
-#    if ! command -v ${TEST_COMMAND} &> /dev/null
-#    then
-        for i in "${INSTALL_COMMANDS[@]}"
-        do
-            if errors=$( ${i} 2>&1 ); then
-                success "${i}"
-            else
-                fail "${i}" "${errors}" true
-                exit $EXIT_VALUE
-            fi
-        done
-#    else
-#        success "${TEST_COMMAND} is alredy installed"
-#    fi
+    #
+    # Docker handles its own caches etc
+    #
+    if errors=$( ${INSTALL_COMMAND} 2>&1 ); then
+        success "${INSTALL_COMMAND}"
+    else
+        fail "${INSTALL_COMMAND}" "${errors}" true
+        exit $EXIT_VALUE
+    fi
 }
 
 # -------------------------------------------------------------------------------- #
@@ -71,7 +64,7 @@ which shellcheck
 
 function get_version_information
 {
-    VERSION=$(${TEST_COMMAND} --version | grep 'version:' | awk '{ print $2 }')
+    VERSION=$(${TEST_COMMAND} --version | grep 'version:' | awk '{ print $2 }' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/')
     BANNER="Run ${TEST_COMMAND} (v${VERSION})"
 }
 
