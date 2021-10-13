@@ -25,7 +25,9 @@ set -Eeuo pipefail
 # CURRENT_STAGE - The current stage used for the reporting output.                 #
 # -------------------------------------------------------------------------------- #
 
-INSTALL_COMMANDS=('wget -qO- "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xJv' 'sudo cp "shellcheck-stable/shellcheck" /usr/bin/' 'sudo chmod 755 /usr/bin/shellcheck')
+#wget -q -O - "http://wordpress.org/latest.tar.gz" | tar -xzf - -C /var/www
+
+INSTALL_COMMANDS=('wget -qO- "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf' 'sudo cp "shellcheck-stable/shellcheck" /usr/bin/' 'sudo chmod 755 /usr/bin/shellcheck')
 
 TEST_COMMAND='shellcheck'
 FILE_TYPE_SEARCH_PATTERN='(shell|dash) script'
