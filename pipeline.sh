@@ -25,11 +25,7 @@ set -Eeuo pipefail
 # CURRENT_STAGE - The current stage used for the reporting output.                 #
 # -------------------------------------------------------------------------------- #
 
-
-INSTALL_COMMANDS=('wget -q https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz' 'tar -xvf shellcheck-stable.linux.x86_64.tar.xz')
-#wget -q -O /tmp/shellcheck-stable.linux.x86_64.tar.xz https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf' 'sudo cp "shellcheck-stable/shellcheck" /usr/bin/' 'sudo chmod 755 /usr/bin/shellcheck')
-#INSTALL_COMMAND='wget -q -O - "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf - -C /usr/bin/'
-#('wget -qO- "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf' 'sudo cp "shellcheck-stable/shellcheck" /usr/bin/' 'sudo chmod 755 /usr/bin/shellcheck')
+INSTALL_COMMANDS=('wget -q https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz' 'tar -xvf shellcheck-stable.linux.x86_64.tar.xz -C /usr/bin')
 
 TEST_COMMAND='shellcheck'
 FILE_TYPE_SEARCH_PATTERN='(shell|dash) script'
