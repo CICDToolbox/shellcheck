@@ -25,10 +25,10 @@ set -Eeuo pipefail
 # CURRENT_STAGE - The current stage used for the reporting output.                 #
 # -------------------------------------------------------------------------------- #
 
-#wget -q -O - "http://wordpress.org/latest.tar.gz" | tar -xzf - -C /var/www
 
-#INSTALL_COMMANDS=('wget -qO- "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf' 'sudo cp "shellcheck-stable/shellcheck" /usr/bin/' 'sudo chmod 755 /usr/bin/shellcheck')
-INSTALL_COMMAND='wget -q -O - "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf - -C /usr/bin/'
+INSTALL_COMMANDS=('wget -q -O - "http://wordpress.org/latest.tar.gz" | tar -xzf - -C /var/www')
+#wget -q -O /tmp/shellcheck-stable.linux.x86_64.tar.xz https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf' 'sudo cp "shellcheck-stable/shellcheck" /usr/bin/' 'sudo chmod 755 /usr/bin/shellcheck')
+#INSTALL_COMMAND='wget -q -O - "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf - -C /usr/bin/'
 #('wget -qO- "https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz" | tar -xzf' 'sudo cp "shellcheck-stable/shellcheck" /usr/bin/' 'sudo chmod 755 /usr/bin/shellcheck')
 
 TEST_COMMAND='shellcheck'
@@ -51,12 +51,15 @@ function install_prerequisites
 # We want to overwrite legacy verions
 #    if ! command -v ${TEST_COMMAND} &> /dev/null
 #    then
-        if errors=$( ${INSTALL_COMMAND} 2>&1 ); then
-            success "${INSTALL_COMMAND}"
-        else
-            fail "${INSTALL_COMMAND}" "${errors}" true
-            exit $EXIT_VALUE
-        fi
+        for i in "${INSTALL_COMMANDS[@]}"
+        do
+            if errors=$( ${i} 2>&1 ); then
+                success "${i}"
+            else
+                fail "${i}" "${errors}" true
+                exit $EXIT_VALUE
+            fi
+        done
 #    else
 #        success "${TEST_COMMAND} is alredy installed"
 #    fi
