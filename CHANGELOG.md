@@ -7,7 +7,9 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 ### [Unreleased](https://github.com/CICDToolbox/shellcheck/compare/v0.1.0...HEAD)
 
-- update readme [`[head]`](https://github.com/CICDToolbox/shellcheck/commit/)
+- shellcheck [`[head]`](https://github.com/CICDToolbox/shellcheck/commit/)
+
+- update readme [`[c483bf7]`](https://github.com/CICDToolbox/shellcheck/commit/c483bf7c68f405d2d19146082a4ac9ff5370e416)
 
 - update [`[9d06bde]`](https://github.com/CICDToolbox/shellcheck/commit/9d06bde9edc9a4fcae12b63ce7f62cd745037cf7)
 
