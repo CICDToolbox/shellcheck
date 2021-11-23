@@ -8,6 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Shellcheck tests
+        env:
+          EXCLUDE_FILES: ".sample$"
         run: ./pipeline.sh
   awesomebot:
     name: Awesomebot
