@@ -135,8 +135,7 @@ function scan_files()
                 check "${filename}"
             fi
         fi
-#    done < <(find . -type f | sed 's|^./||' | sort -zVd)
-    done < <(find . -type f -not -path "./.git/*" | sed 's|^./||' | sort -zVd)
+    done < <(find . -type f -not -path "./.git/*" | sed 's|^./||' | sort -Vf)
 }
 
 # -------------------------------------------------------------------------------- #
