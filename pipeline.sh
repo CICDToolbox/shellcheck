@@ -136,7 +136,7 @@ function scan_files()
             fi
         fi
 #    done < <(find . -type f | sed 's|^./||' | sort -zVd)
-    done < <(find . -type f -not -path "./.git/hooks/*" | sed 's|^./||' | sort -zVd)
+    done < <(find . -type f -not -path "./.git/*" | sed 's|^./||' | sort -zVd)
 }
 
 # -------------------------------------------------------------------------------- #
