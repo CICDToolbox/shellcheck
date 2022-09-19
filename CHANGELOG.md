@@ -7,7 +7,9 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 ### [Unreleased](https://github.com/CICDToolbox/shellcheck/compare/v0.1.0...HEAD)
 
-- Fix find command [`[head]`](https://github.com/CICDToolbox/shellcheck/commit/)
+- Make errors easier to see and default to showing errors [`[head]`](https://github.com/CICDToolbox/shellcheck/commit/)
+
+- Fix find command [`[0126640]`](https://github.com/CICDToolbox/shellcheck/commit/01266404b676b055d3456816e7b35ed802d5b87b)
 
 - Fix find command [`[25df46e]`](https://github.com/CICDToolbox/shellcheck/commit/25df46e2a88eb37f1091b6b74678d14408b3771d)
 
