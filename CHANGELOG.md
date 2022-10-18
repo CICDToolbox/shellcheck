@@ -7,7 +7,9 @@ This changelog was automatically generated using [Caretaker](https://github.com/
 
 ### [Unreleased](https://github.com/CICDToolbox/shellcheck/compare/v0.1.0...HEAD)
 
-- Make errors easier to see and default to showing errors [`[head]`](https://github.com/CICDToolbox/shellcheck/commit/)
+- Change the logic for skipping and showing skipped files [`[head]`](https://github.com/CICDToolbox/shellcheck/commit/)
+
+- Make errors easier to see and default to showing errors [`[27cf31f]`](https://github.com/CICDToolbox/shellcheck/commit/27cf31f1653c1f3fbace249f5bda6aceaed7b7ca)
 
 - Fix find command [`[0126640]`](https://github.com/CICDToolbox/shellcheck/commit/01266404b676b055d3456816e7b35ed802d5b87b)
 
