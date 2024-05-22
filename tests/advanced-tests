@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Grant that custom checks are working.
+set -eo pipefail
+
+# shellcheck disable=SC1091
+source ./scan.sh
+
+# Lint the scan script
+echo "Linting the scan.sh script..."
+check ./scan.sh
